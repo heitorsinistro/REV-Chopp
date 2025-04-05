@@ -31,19 +31,29 @@ namespace REVChopp.Core
 
         private static void MenuLogin()
         {
-            Console.Write("Usuário: ");
+            Console.Write("Nome: ");
             string nome = Console.ReadLine() ?? string.Empty;
+
             Console.Write("Senha: ");
             string senha = Console.ReadLine() ?? string.Empty;
 
-            if (Usuario.Autenticar(nome, senha))
+            Console.Write("Nível de Acesso (admin/funcionario): ");
+            string nivelAcesso = Console.ReadLine() ?? string.Empty;
+
+            if (string.IsNullOrWhiteSpace(nome) || string.IsNullOrWhiteSpace(senha) || string.IsNullOrWhiteSpace(nivelAcesso))
             {
-                usuarioAutenticado = true;
-                Console.WriteLine("Autenticação bem-sucedida!");
-                var vendaService = new VendaService(estoque);
-                vendaService.MenuVendas();
+                Console.WriteLine("Todos os campos são obrigatórios.");
+                return;
             }
-            else Console.WriteLine("Falha na autenticação.");
+
+            if (Usuario.Autenticar(nome, senha, nivelAcesso))
+            {
+                Console.WriteLine("Autenticação bem-sucedida!");
+            }
+            else
+            {
+                Console.WriteLine("Falha na autenticação.");
+            }
         }
 
         private static void MenuEstoque()

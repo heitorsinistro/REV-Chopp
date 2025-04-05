@@ -1,8 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "VFQlhgmrjO4=",
+  "dgSpecHash": "o/0oLj4yTEU=",
   "success": true,
   "projectFilePath": "C:\\Users\\Win10Pró\\Documents\\GitHub\\REV-Chopp\\REVChopp\\REVChopp.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\Win10Pró\\.nuget\\packages\\dapper\\2.1.66\\dapper.2.1.66.nupkg.sha512",
+    "C:\\Users\\Win10Pró\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.2\\microsoft.extensions.dependencyinjection.abstractions.8.0.2.nupkg.sha512",
+    "C:\\Users\\Win10Pró\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.2\\microsoft.extensions.logging.abstractions.8.0.2.nupkg.sha512",
+    "C:\\Users\\Win10Pró\\.nuget\\packages\\mysqlconnector\\2.4.0\\mysqlconnector.2.4.0.nupkg.sha512"
+  ],
   "logs": []
 }

@@ -1,3 +1,18 @@
 {
-    "dotnet.defaultSolution": "REVChopp.sln"
+    "dotnet.defaultSolution": "REVChopp.sln",
+    "sqltools.connections": [   
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "project-revchopp",
+            "database": "revchopp",
+            "username": "root"
+        }
+    ]
 }
