@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace REVChopp.Models
 {
     public class Venda
