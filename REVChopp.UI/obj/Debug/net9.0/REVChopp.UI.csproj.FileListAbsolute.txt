@@ -1,0 +1,14 @@
+C:\Users\Win10Pró\Documents\GitHub\REV-Chopp\REVChopp.UI\obj\Debug\net9.0\REVChopp.UI.csproj.AssemblyReference.cache
+C:\Users\Win10Pró\Documents\GitHub\REV-Chopp\REVChopp.UI\obj\Debug\net9.0\Avalonia\Resources.Inputs.cache
+C:\Users\Win10Pró\Documents\GitHub\REV-Chopp\REVChopp.UI\obj\Debug\net9.0\Avalonia\resources
+C:\Users\Win10Pró\Documents\GitHub\REV-Chopp\REVChopp.UI\obj\Debug\net9.0\REVChopp.UI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Win10Pró\Documents\GitHub\REV-Chopp\REVChopp.UI\obj\Debug\net9.0\REVChopp.UI.AssemblyInfoInputs.cache
+C:\Users\Win10Pró\Documents\GitHub\REV-Chopp\REVChopp.UI\obj\Debug\net9.0\REVChopp.UI.AssemblyInfo.cs
+C:\Users\Win10Pró\Documents\GitHub\REV-Chopp\REVChopp.UI\obj\Debug\net9.0\REVChopp.UI.csproj.CoreCompileInputs.cache
+C:\Users\Win10Pró\Documents\GitHub\REV-Chopp\REVChopp.UI\obj\Debug\net9.0\REVChopp.UI.sourcelink.json
+C:\Users\Win10Pró\Documents\GitHub\REV-Chopp\REVChopp.UI\obj\Debug\net9.0\Avalonia\REVChopp.UI.dll
+C:\Users\Win10Pró\Documents\GitHub\REV-Chopp\REVChopp.UI\obj\Debug\net9.0\Avalonia\REVChopp.UI.pdb
+C:\Users\Win10Pró\Documents\GitHub\REV-Chopp\REVChopp.UI\obj\Debug\net9.0\refint\Avalonia\REVChopp.UI.dll
+C:\Users\Win10Pró\Documents\GitHub\REV-Chopp\REVChopp.UI\obj\Debug\net9.0\REVChopp.UI.dll
+C:\Users\Win10Pró\Documents\GitHub\REV-Chopp\REVChopp.UI\obj\Debug\net9.0\refint\REVChopp.UI.dll
+C:\Users\Win10Pró\Documents\GitHub\REV-Chopp\REVChopp.UI\obj\Debug\net9.0\REVChopp.UI.pdb
