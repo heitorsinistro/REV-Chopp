@@ -29,8 +29,5 @@ build_property.EnableCodeStyleSeverity =
 [C:/Users/Win10Pró/Documents/GitHub/REV-Chopp/REVChopp.UI/App.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/Win10Pró/Documents/GitHub/REV-Chopp/REVChopp.UI/Styles/Styles.axaml]
-build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
-
 [C:/Users/Win10Pró/Documents/GitHub/REV-Chopp/REVChopp.UI/Views/MainWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml

@@ -6,6 +6,6 @@ namespace REVChopp.Models
         public string? Nome { get; set; }
         public decimal Preco { get; set; }
 
-        public string? QuantidadeEstoque { get; set; }
+        public int QuantidadeEstoque { get; set; }
     }
 }

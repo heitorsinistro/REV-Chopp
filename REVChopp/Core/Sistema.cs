@@ -49,6 +49,8 @@ namespace REVChopp.Core
             if (Usuario.Autenticar(nome, senha, nivelAcesso))
             {
                 Console.WriteLine("Autenticação bem-sucedida!");
+                usuarioAutenticado = true;
+                Console.WriteLine($"Bem-vindo, {nome}! Você é um(a) {nivelAcesso}.");
             }
             else
             {
@@ -72,12 +74,17 @@ namespace REVChopp.Core
                     Console.Write("Nome do produto: ");
                     string? nome = Console.ReadLine();
                     Console.Write("Preço: ");
-                    if (decimal.TryParse(Console.ReadLine(), out decimal preco))
+                    if (!decimal.TryParse(Console.ReadLine(), out decimal preco))
                     {
-                        int id = new Random().Next(100, 999);
-                        estoque.AdicionarProduto(new Produto { Id = id, Nome = nome, Preco = preco });
+                        Console.WriteLine("Preço inválido.");
+                        continue;
                     }
-                    else Console.WriteLine("Preço inválido.");
+                    Console.Write("Quantidade em estoque: ");
+                    if (int.TryParse(Console.ReadLine(), out int quantidade))
+                    {
+                        estoque.AdicionarProduto(new Produto { Id = new Random().Next(100, 999), Nome = nome, Preco = preco, QuantidadeEstoque = quantidade });
+                    }
+                    else Console.WriteLine("Quantidade inválida.");
                 }
                 else if (opcao == "2")
                 {

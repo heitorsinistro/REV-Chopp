@@ -5,7 +5,7 @@
              
     <Application.Styles>
         <!-- Estilos personalizados -->
-        <StyleInclude Source="avares://REVChopp.UI/Styles/Styles.axaml" />
+        <FluentTheme />
     </Application.Styles>
 
 </Application>

@@ -8,8 +8,8 @@ namespace REVChopp.Services
 
         public Estoque()
         {
-            produtos.Add(new Produto { Id = 1, Nome = "Chopp Pilsen", Preco = 10.0m });
-            produtos.Add(new Produto { Id = 2, Nome = "Chopp IPA", Preco = 12.0m });
+            produtos.Add(new Produto { Id = 1, Nome = "Chopp Pilsen", Preco = 10.0m, QuantidadeEstoque = 10 });
+            produtos.Add(new Produto { Id = 2, Nome = "Chopp IPA", Preco = 12.0m, QuantidadeEstoque = 5 });
         }
 
         public void AdicionarProduto(Produto produto)
@@ -41,7 +41,7 @@ namespace REVChopp.Services
             Console.WriteLine("Produtos no estoque:");
             foreach (var p in produtos)
             {
-                Console.WriteLine($"{p.Id}. {p.Nome} - R${p.Preco}");
+                Console.WriteLine($"{p.Id}. {p.Nome} - R${p.Preco} - {p.QuantidadeEstoque} unidades");
             }
         }
 
