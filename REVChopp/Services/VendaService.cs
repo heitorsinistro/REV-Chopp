@@ -36,15 +36,25 @@ namespace REVChopp.Services
             Console.Write("ID do produto: ");
             if (int.TryParse(Console.ReadLine(), out int id))
             {
-                var produto = estoque.BuscarProduto(id);
-                if (produto != null)
+                Console.Write("Quantidade: ");
+                if (int.TryParse(Console.ReadLine(), out int quantidade) && quantidade > 0)
                 {
-                    venda.AdicionarProduto(produto);
-                    estoque.RemoverProduto(id);
-                    Console.WriteLine($"{produto.Nome} adicionado ao pedido.");
+                    if (estoque.RemoverProduto(id, quantidade))
+                    {
+                        var produto = estoque.BuscarProduto(id);
+                        if (produto != null)
+                        {
+                            for (int i = 0; i < quantidade; i++)
+                            {
+                                venda.AdicionarProduto(produto);
+                            }
+                            Console.WriteLine($"{quantidade} unidades de {produto.Nome} adicionadas ao pedido.");
+                        }
+                    }
                 }
-                else Console.WriteLine("Produto não encontrado.");
+                else Console.WriteLine("Quantidade inválida.");
             }
+            else Console.WriteLine("ID inválido.");
         }
 
         private void FinalizarPedido()

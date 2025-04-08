@@ -18,16 +18,16 @@ namespace REVChopp.Services
             Console.WriteLine($"{produto.Nome} adicionado ao estoque.");
         }
 
-        public bool RemoverProduto(int id)
+        public bool RemoverProduto(int id, int quantidade)
         {
             var produto = produtos.FirstOrDefault(p => p.Id == id);
-            if (produto != null)
+            if (produto != null && produto.QuantidadeEstoque >= quantidade)
             {
-                produtos.Remove(produto);
-                Console.WriteLine($"{produto.Nome} removido do estoque.");
+                produto.QuantidadeEstoque -= quantidade;
+                Console.WriteLine($"{quantidade} unidades de {produto.Nome} removidas do estoque.");
                 return true;
             }
-            Console.WriteLine("Produto não encontrado.");
+            Console.WriteLine("Produto não encontrado ou quantidade insuficiente.");
             return false;
         }
 

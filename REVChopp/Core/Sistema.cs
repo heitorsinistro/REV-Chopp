@@ -91,7 +91,14 @@ namespace REVChopp.Core
                     estoque.ListarProdutos();
                     Console.Write("ID do produto para remover: ");
                     if (int.TryParse(Console.ReadLine(), out int id))
-                        estoque.RemoverProduto(id);
+                    {
+                        Console.Write("Quantidade a remover: ");
+                        if (int.TryParse(Console.ReadLine(), out int quantidade) && quantidade > 0)
+                        {
+                            estoque.RemoverProduto(id, quantidade);
+                        }
+                        else Console.WriteLine("Quantidade inválida.");
+                    }
                 }
                 else if (opcao == "3") estoque.ListarProdutos();
                 else if (opcao == "4") break;
