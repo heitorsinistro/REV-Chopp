@@ -1,6 +1,6 @@
 namespace REVChopp.Models
 {
-    public class Produto
+    public class Produto //arrumar para ProdutoUnitario depois, e dependencias
     {
         public int Id { get; set; }
         public string? Nome { get; set; }

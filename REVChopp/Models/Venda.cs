@@ -1,6 +1,6 @@
 namespace REVChopp.Models
 {
-    public class Venda
+    public class Venda //arrumar para VendaProdutoUnitario depois, e dependencias
     {
         public List<Produto> Itens { get; private set; } = new List<Produto>();
 
