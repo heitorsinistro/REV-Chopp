@@ -4,15 +4,16 @@ namespace REVChopp.Services
 {
     public class Estoque
     {
-        private List<Produto> produtos = new List<Produto>();
+        private List<ProdutoUnitario> produtos = new List<ProdutoUnitario>();
+        private List<Barril> barris = new List<Barril>();
 
         public Estoque()
         {
-            produtos.Add(new Produto { Id = 1, Nome = "Chopp Pilsen", Preco = 10.0m, QuantidadeEstoque = 10 });
-            produtos.Add(new Produto { Id = 2, Nome = "Chopp IPA", Preco = 12.0m, QuantidadeEstoque = 5 });
+            produtos.Add(new ProdutoUnitario { Id = 1, Nome = "Chopp Pilsen", Preco = 10.0m, QuantidadeEstoque = 10 });
+            produtos.Add(new ProdutoUnitario { Id = 2, Nome = "Chopp IPA", Preco = 12.0m, QuantidadeEstoque = 5 });
         }
 
-        public void AdicionarProduto(Produto produto)
+        public void AdicionarProduto(ProdutoUnitario produto)
         {
             produtos.Add(produto);
             Console.WriteLine($"{produto.Nome} adicionado ao estoque.");
@@ -45,7 +46,40 @@ namespace REVChopp.Services
             }
         }
 
-        public Produto? BuscarProduto(int id)
+        public void AdicionarBarril(Barril barril)
+        {
+            barris.Add(barril);
+            Console.WriteLine($"{barril.Nome} adicionado ao estoque.");
+        }
+
+        public bool RemoverBarril(int id)
+        {
+            var barril = barris.FirstOrDefault(b => b.Id == id);
+            if (barril != null)
+            {
+                barris.Remove(barril);
+                Console.WriteLine($"{barril.Nome} removido do estoque.");
+                return true;
+            }
+            Console.WriteLine("Barril não encontrado.");
+            return false;
+        }
+        
+        public void ListarBarris()
+        {
+            if (!barris.Any())
+            {
+                Console.WriteLine("Estoque de barris vazio.");
+                return;
+            }
+            Console.WriteLine("Barris no estoque:");
+            foreach (var b in barris)
+            {
+                Console.WriteLine($"{b.Id}. {b.Nome} - {b.VolumeTotalLitros}L - {b.VolumeRestanteMl}ml restantes - Tipo: {b.TipoCerveja}");
+            }
+        }
+
+        public ProdutoUnitario? BuscarProduto(int id)
         {
             return produtos.FirstOrDefault(p => p.Id == id);
         }

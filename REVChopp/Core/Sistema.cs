@@ -62,10 +62,13 @@ namespace REVChopp.Core
         {
             while (true)
             {
-                Console.WriteLine("\n1. Adicionar produto");
-                Console.WriteLine("2. Remover produto");
-                Console.WriteLine("3. Listar produtos");
-                Console.WriteLine("4. Voltar");
+                Console.WriteLine("\n1. Adicionar produto unitário");
+                Console.WriteLine("2. Remover produto unitário");
+                Console.WriteLine("3. Listar produtos no estoque");
+                Console.WriteLine("4. Adicionar barril");
+                Console.WriteLine("5. Remover barril");
+                Console.WriteLine("6. Listar barris no estoque");
+                Console.WriteLine("7. Voltar");
                 Console.Write("Opção: ");
                 string? opcao = Console.ReadLine();
 
@@ -82,7 +85,7 @@ namespace REVChopp.Core
                     Console.Write("Quantidade em estoque: ");
                     if (int.TryParse(Console.ReadLine(), out int quantidade))
                     {
-                        estoque.AdicionarProduto(new Produto { Id = new Random().Next(100, 999), Nome = nome, Preco = preco, QuantidadeEstoque = quantidade });
+                        estoque.AdicionarProduto(new ProdutoUnitario { Id = new Random().Next(100, 999), Nome = nome, Preco = preco, QuantidadeEstoque = quantidade });
                     }
                     else Console.WriteLine("Quantidade inválida.");
                 }
@@ -101,7 +104,28 @@ namespace REVChopp.Core
                     }
                 }
                 else if (opcao == "3") estoque.ListarProdutos();
-                else if (opcao == "4") break;
+                else if (opcao == "4")
+                {
+                    Console.Write("Nome do barril: ");
+                    string? nome = Console.ReadLine();
+                    Console.Write("Cerveja: ");
+                    string? cerveja = Console.ReadLine();
+                    Console.Write("Litros (L): ");
+                    if (int.TryParse(Console.ReadLine(), out int capacidadeL))
+                    {
+                        estoque.AdicionarBarril(new Barril { Id = new Random().Next(100, 999), Nome = nome, VolumeTotalLitros = capacidadeL, VolumeRestanteMl = capacidadeL*1000,TipoCerveja = cerveja });
+                    }
+                    else Console.WriteLine("Capacidade inválida.");
+                }
+                else if (opcao == "5")
+                {
+                    estoque.ListarBarris();
+                    //if(estoque.barris.Count == 0) break; -- arrumar uma forma de voltar para o menu caso não tenha barris
+                    Console.Write("ID do barril para remover: ");
+                    if (int.TryParse(Console.ReadLine(), out int id)) estoque.RemoverBarril(id);
+                }
+                else if (opcao == "6") estoque.ListarBarris();
+                else if (opcao == "7") break;
                 else Console.WriteLine("Opção inválida.");
             }
         }
