@@ -65,18 +65,19 @@ namespace REVChopp.Services
             return false;
         }
         
-        public void ListarBarris()
+        public bool ListarBarris()
         {
             if (!barris.Any())
             {
                 Console.WriteLine("Estoque de barris vazio.");
-                return;
+                return false;
             }
             Console.WriteLine("Barris no estoque:");
             foreach (var b in barris)
             {
                 Console.WriteLine($"{b.Id}. {b.Nome} - {b.VolumeTotalLitros}L - {b.VolumeRestanteMl}ml restantes - Tipo: {b.TipoCerveja}");
             }
+            return true;
         }
 
         public ProdutoUnitario? BuscarProduto(int id)

@@ -119,10 +119,17 @@ namespace REVChopp.Core
                 }
                 else if (opcao == "5")
                 {
-                    estoque.ListarBarris();
-                    //if(estoque.barris.Count == 0) break; -- arrumar uma forma de voltar para o menu caso não tenha barris
+                    if (!estoque.ListarBarris()) // Verifica se há barris no estoque
+                    {
+                        Console.WriteLine("Não há barris no estoque. Retornando ao menu...");
+                        continue; // Volta ao início do loop do menu
+                    }
+                
                     Console.Write("ID do barril para remover: ");
-                    if (int.TryParse(Console.ReadLine(), out int id)) estoque.RemoverBarril(id);
+                    if (int.TryParse(Console.ReadLine(), out int id))
+                    {
+                        estoque.RemoverBarril(id);
+                    }
                 }
                 else if (opcao == "6") estoque.ListarBarris();
                 else if (opcao == "7") break;
