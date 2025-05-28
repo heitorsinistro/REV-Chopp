@@ -14,7 +14,8 @@ namespace REVChopp.Core
                 .AddJsonFile("appsettings.json");
 
             var configuration = builder.Build();
-            ConnectionString = configuration.GetConnectionString("RevChopp");
+            ConnectionString = configuration.GetConnectionString("RevChopp")
+                ?? throw new InvalidOperationException("String de conexão 'RevChopp' não encontrada.");
         }
 
         public static MySqlConnection ObterConexao()
