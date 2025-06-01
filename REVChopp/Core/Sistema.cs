@@ -1,6 +1,7 @@
 using System;
 using REVChopp.Repositories;
 using REVChopp.Models;
+using REVChopp.Services;
 
 namespace REVChopp.Core
 {
@@ -46,9 +47,14 @@ namespace REVChopp.Core
 
         private static void ListarProdutos()
         {
-            var produtos = ProdutoUnitarioRepository.ListarTodos();
-            foreach (var p in produtos)
-                Console.WriteLine($"{p.Id} - {p.Nome} - R${p.Preco} - Estoque: {p.QuantidadeEstoque}");
+            try
+            {
+                EstoqueService.ListarProdutos();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Erro ao listar produtos: {ex.Message}");
+            }
         }
     }
 }

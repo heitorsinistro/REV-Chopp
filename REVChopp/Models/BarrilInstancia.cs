@@ -1,6 +1,6 @@
 namespace REVChopp.Models
 {
-    public class Barril
+    public class BarrilInstancia
     {
         public int Id { get; set; }
         public int BarrilTipoId { get; set; }

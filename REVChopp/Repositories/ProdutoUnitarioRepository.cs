@@ -53,6 +53,16 @@ namespace REVChopp.Repositories
             return null;
         }
 
+        public static void Remover(ProdutoUnitario produto)
+        {
+            using (var conexao = BancoDados.ObterConexao())
+            {
+                var comando = new MySqlCommand("DELETE FROM ProdutoUnitario WHERE Id = @id", conexao);
+                comando.Parameters.AddWithValue("@id", produto.Id);
+                comando.ExecuteNonQuery();
+            }
+        }
+
         public static void Adicionar(ProdutoUnitario produto)
         {
             using (var conexao = BancoDados.ObterConexao())
