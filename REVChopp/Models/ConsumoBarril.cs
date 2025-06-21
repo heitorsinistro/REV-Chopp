@@ -4,7 +4,7 @@ namespace REVChopp.Models
     {
         public int Id { get; set; }
         public int VendaId { get; set; }
-        public int BarrilinstanciaId { get; set; }
+        public int BarrilInstanciaId { get; set; }
         public int MlUtilizado { get; set; }
     }
 }
