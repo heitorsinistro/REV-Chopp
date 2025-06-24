@@ -74,5 +74,16 @@ namespace REVChopp.Repositories
                 comando.ExecuteNonQuery();
             }
         }
+
+        public static void DescontarEstoque(int produtoId, int quantidade)
+        {
+            using (var conexao = BancoDados.ObterConexao())
+            {
+                var comando = new MySqlCommand("UPDATE ProdutoUnitario SET QuantidadeEstoque = QuantidadeEstoque - @quantidade WHERE Id = @id", conexao);
+                comando.Parameters.AddWithValue("@quantidade", quantidade);
+                comando.Parameters.AddWithValue("@id", produtoId);
+                comando.ExecuteNonQuery();
+            }
+        }
     }
 }

@@ -22,5 +22,35 @@ namespace REVChopp.Repositories
                 comando.ExecuteNonQuery();
             }
         }
+
+        public static List<ItensPedido> ListarPorPedido(int pedidoId)
+        {
+            var lista = new List<ItensPedido>();
+            using (var conexao = BancoDados.ObterConexao())
+            {
+                var comando = new MySqlCommand("SELECT * FROM ItensPedido WHERE id_pedido = @pedido", conexao);
+                comando.Parameters.AddWithValue("@pedido", pedidoId);
+                using (var leitor = comando.ExecuteReader())
+                {
+                    while (leitor.Read())
+                    {
+                        lista.Add(new ItensPedido
+                        {
+                            Id = leitor.GetInt32("id_item"),
+                            PedidoId = leitor.GetInt32("id_pedido"),
+                            ProdutoId = leitor["id_produto"] as int?,
+                            CopoId = leitor["id_copo"] as int?,
+                            TipoItem = leitor.GetString("tipo_item"),
+                            NomeItem = leitor.GetString("nome_item"),
+                            PrecoUnitario = leitor.GetDecimal("preco_unitario"),
+                            Quantidade = leitor.GetInt32("quantidade"),
+                            Subtotal = leitor.GetDecimal("subtotal")
+                        });
+                    }
+
+                    return lista;
+                }
+            }
+        }
     }
 }

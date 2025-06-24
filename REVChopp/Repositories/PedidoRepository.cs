@@ -31,5 +31,30 @@ namespace REVChopp.Repositories
                 comando.ExecuteNonQuery();
             }
         }
+
+        public static Pedido? BuscarPorId(int id)
+        {
+            using (var conexao = BancoDados.ObterConexao())
+            {
+                var comando = new MySqlCommand("SELECT * FROM Pedido WHERE id_pedido = @id", conexao);
+                comando.Parameters.AddWithValue("@id", id);
+                using (var leitor = comando.ExecuteReader())
+                {
+                    if (leitor.Read())
+                    {
+                        return new Pedido
+                        {
+                            Id = leitor.GetInt32("id_pedido"),
+                            UsuarioId = leitor.GetInt32("UsuarioId"),
+                            NumeroMesa = leitor.GetInt32("NumeroMesa"),
+                            DataHora = leitor.GetDateTime("DataHora"),
+                            FormaPagamento = leitor.GetString("FormaPagamento"),
+                            ValorTotal = leitor.GetDecimal("ValorTotal")
+                        };
+                    }
+                }
+            }
+            return null;
+        }
     }
 }

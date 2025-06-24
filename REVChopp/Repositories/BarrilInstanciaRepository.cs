@@ -82,5 +82,31 @@ namespace REVChopp.Repositories
             }
             return barris;
         }
+
+        public static List<BarrilInstancia> ListarDisponiveis()
+        {
+            var barris = new List<BarrilInstancia>();
+            using (var conexao = BancoDados.ObterConexao())
+            {
+                var comando = new MySqlCommand("SELECT * FROM BarrilInstancia WHERE Status = 'em uso' AND volume_restante_ml > 0", conexao);
+                using (var leitor = comando.ExecuteReader())
+                {
+                    int idxDataAbertura = leitor.GetOrdinal("DataAbertura");
+                    int idxDataValidade = leitor.GetOrdinal("DataValidade");
+                    while (leitor.Read())
+                    {
+                        var barril = new BarrilInstancia
+                        {
+                            Id = leitor.GetInt32("id_barril_instancia"),
+                            BarrilTipoId = leitor.GetInt32("id_barril_tipo"),
+                            VolumeRestanteMl = leitor.GetInt32("volume_restante_ml"),
+                            Status = leitor.GetString("status")
+                        };
+                        barris.Add(barril);
+                    }
+                }
+            }
+            return barris;
+        }
     }
 }
