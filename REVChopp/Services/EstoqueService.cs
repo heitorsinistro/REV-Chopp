@@ -13,7 +13,7 @@ namespace REVChopp.Services
             if (produto.QuantidadeEstoque < 0)
                 throw new ArgumentException("Quantidade em estoque não pode ser negativa.", nameof(produto.QuantidadeEstoque));
 
-            ProdutoUnitarioRepository.Adicionar(produto);
+            ProdutoUnitarioRepository.Inserir(produto);
         }
 
         public static void RemoverProduto(int id)
@@ -59,7 +59,7 @@ namespace REVChopp.Services
             if (barril == null)
                 throw new ArgumentNullException(nameof(barril), "Barril não pode ser nulo.");
 
-            BarrilInstanciaRepository.Adicionar(barril);
+            BarrilInstanciaRepository.Inserir(barril);
         }
 
         public static void RemoverBarril(int id)

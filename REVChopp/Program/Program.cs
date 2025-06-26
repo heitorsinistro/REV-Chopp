@@ -8,7 +8,7 @@
         {
             while (true)
             {
-                Sistema.MenuPrincipal();
+                Sistema.Iniciar();
             }
         }
     }

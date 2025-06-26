@@ -11,7 +11,7 @@ namespace REVChopp.Repositories
         {
             using (var conexao = BancoDados.ObterConexao())
             {
-                var insert = new MySqlCommand("INSERT INTO ConsumoBarril (id_venda, id_barril_instancia, ml_consumido) VALUES (@vendaId, @barrilInstanciaId, @mlConsumido)", conexao);
+                var insert = new MySqlCommand("INSERT INTO ConsumoBarril (id_venda, id_barril_instancia, ml_utilizado) VALUES (@vendaId, @barrilInstanciaId, @mlConsumido)", conexao);
                 insert.Parameters.AddWithValue("@vendaId", vendaId);
                 insert.Parameters.AddWithValue("@barrilInstanciaId", barrilInstanciaId);
                 insert.Parameters.AddWithValue("@mlConsumido", mlConsumido);
@@ -39,10 +39,10 @@ namespace REVChopp.Repositories
                     {
                         var consumo = new ConsumoBarril
                         {
-                            Id = reader.GetInt32("id_consumo_barril"),
+                            Id = reader.GetInt32("id_consumo"),
                             VendaId = reader.GetInt32("id_venda"),
                             BarrilInstanciaId = reader.GetInt32("id_barril_instancia"),
-                            MlUtilizado = reader.GetInt32("ml_consumido")
+                            MlUtilizado = reader.GetInt32("ml_utilizado")
                         };
                         consumos.Add(consumo);
                     }
@@ -50,6 +50,29 @@ namespace REVChopp.Repositories
             }
 
             return consumos;
+        }
+
+        public static List<(int BarrilTipoId, string NomeBarril, int MlConsumido)> ConsultarResumoBarris(DateTime inicio, DateTime fim)
+        {
+            var lista = new List<(int, string, int)>();
+            using (var conexao = BancoDados.ObterConexao())
+            {
+                var comando = new MySqlCommand(@"
+                    SELECT bt.id_barril_tipo, bt.nome, SUM(cb.ml_utilizado) as total
+                    FROM ConsumoBarril cb
+                    JOIN BarrilInstancia bi ON bi.id_barril_instancia = cb.id_barril_instancia
+                    JOIN BarrilTipo bt ON bt.id_barril_tipo = bi.id_barril_tipo
+                    JOIN Venda v ON v.id_venda = cb.id_venda
+                    WHERE v.data_hora BETWEEN @inicio AND @fim
+                    GROUP BY bt.id_barril_tipo, bt.nome", conexao);
+                comando.Parameters.AddWithValue("@inicio", inicio);
+                comando.Parameters.AddWithValue("@fim", fim);
+                using var reader = comando.ExecuteReader();
+                while (reader.Read())
+                    lista.Add((reader.GetInt32("id_barril_tipo"), reader.GetString("nome"),
+                            reader.GetInt32("total")));
+                return lista;
+            }
         }
     }
 }

@@ -6,11 +6,12 @@ namespace REVChopp.Repositories
 {
     public class BarrilInstanciaRepository
     {
-        public static void Adicionar(BarrilInstancia barril)
+        public static void Inserir(BarrilInstancia barril)
         {
             using (var conexao = BancoDados.ObterConexao())
             {
-                var comando = new MySqlCommand("INSERT INTO BarrilInstancia (BarrilTipoId, VolumeRestanteMl, Status, DataAbertura, DataValidade) VALUES (@barrilTipoId, @volumeRestanteMl, @status, @dataAbertura, @dataValidade)", conexao);
+                var comando = new MySqlCommand(@"INSERT INTO BarrilInstancia (id_barril_tipo, volume_restante_ml, status, data_abertura, data_validade) 
+                    VALUES (@barrilTipoId, @volumeRestanteMl, @status, @dataAbertura, @dataValidade)", conexao);
                 comando.Parameters.AddWithValue("@barrilTipoId", barril.BarrilTipoId);
                 comando.Parameters.AddWithValue("@volumeRestanteMl", barril.VolumeRestanteMl);
                 comando.Parameters.AddWithValue("@status", barril.Status);
@@ -24,7 +25,7 @@ namespace REVChopp.Repositories
         {
             using (var conexao = BancoDados.ObterConexao())
             {
-                var comando = new MySqlCommand("DELETE FROM BarrilInstancia WHERE Id = @id", conexao);
+                var comando = new MySqlCommand("DELETE FROM BarrilInstancia WHERE id_barril_instancia = @id", conexao);
                 comando.Parameters.AddWithValue("@id", id);
                 comando.ExecuteNonQuery();
             }
@@ -34,7 +35,7 @@ namespace REVChopp.Repositories
         {
             using (var conexao = BancoDados.ObterConexao())
             {
-                var comando = new MySqlCommand("SELECT * FROM BarrilInstancia WHERE Id = @id", conexao);
+                var comando = new MySqlCommand("SELECT * FROM BarrilInstancia WHERE id_barril_instancia = @id", conexao);
                 comando.Parameters.AddWithValue("@id", id);
                 using (var leitor = comando.ExecuteReader())
                 {
@@ -42,12 +43,12 @@ namespace REVChopp.Repositories
                     {
                         return new BarrilInstancia
                         {
-                            Id = leitor.GetInt32("Id"),
-                            BarrilTipoId = leitor.GetInt32("BarrilTipoId"),
-                            VolumeRestanteMl = leitor.GetInt32("VolumeRestanteMl"),
-                            Status = leitor.GetString("Status"),
-                            DataAbertura = leitor.IsDBNull(leitor.GetOrdinal("DataAbertura")) ? null : leitor.GetDateTime(leitor.GetOrdinal("DataAbertura")),
-                            DataValidade = leitor.IsDBNull(leitor.GetOrdinal("DataValidade")) ? null : leitor.GetDateTime(leitor.GetOrdinal("DataValidade"))
+                            Id = leitor.GetInt32("id_barril_instancia"),
+                            BarrilTipoId = leitor.GetInt32("id_barril_tipo"),
+                            VolumeRestanteMl = leitor.GetInt32("volume_restante_ml"),
+                            Status = leitor.GetString("status"),
+                            DataAbertura = leitor.IsDBNull(leitor.GetOrdinal("data_abertura")) ? null : leitor.GetDateTime(leitor.GetOrdinal("DataAbertura")),
+                            DataValidade = leitor.IsDBNull(leitor.GetOrdinal("data_validade")) ? null : leitor.GetDateTime(leitor.GetOrdinal("DataValidade"))
                         };
                     }
                 }
@@ -63,16 +64,16 @@ namespace REVChopp.Repositories
                 var comando = new MySqlCommand("SELECT * FROM BarrilInstancia", conexao);
                 using (var leitor = comando.ExecuteReader())
                 {
-                    int idxDataAbertura = leitor.GetOrdinal("DataAbertura");
-                    int idxDataValidade = leitor.GetOrdinal("DataValidade");
+                    int idxDataAbertura = leitor.GetOrdinal("data_abertura");
+                    int idxDataValidade = leitor.GetOrdinal("data_validade");
                     while (leitor.Read())
                     {
                         var barril = new BarrilInstancia
                         {
-                            Id = leitor.GetInt32("Id"),
-                            BarrilTipoId = leitor.GetInt32("BarrilTipoId"),
-                            VolumeRestanteMl = leitor.GetInt32("VolumeRestanteMl"),
-                            Status = leitor.GetString("Status"),
+                            Id = leitor.GetInt32("id_barril_instancia"),
+                            BarrilTipoId = leitor.GetInt32("id_barril_tipo"),
+                            VolumeRestanteMl = leitor.GetInt32("volume_restante_ml"),
+                            Status = leitor.GetString("status"),
                             DataAbertura = leitor.IsDBNull(idxDataAbertura) ? null : leitor.GetDateTime(idxDataAbertura),
                             DataValidade = leitor.IsDBNull(idxDataValidade) ? null : leitor.GetDateTime(idxDataValidade)
                         };
@@ -88,11 +89,11 @@ namespace REVChopp.Repositories
             var barris = new List<BarrilInstancia>();
             using (var conexao = BancoDados.ObterConexao())
             {
-                var comando = new MySqlCommand("SELECT * FROM BarrilInstancia WHERE Status = 'em uso' AND volume_restante_ml > 0", conexao);
+                var comando = new MySqlCommand("SELECT * FROM BarrilInstancia WHERE status = 'em uso' AND volume_restante_ml > 0", conexao);
                 using (var leitor = comando.ExecuteReader())
                 {
-                    int idxDataAbertura = leitor.GetOrdinal("DataAbertura");
-                    int idxDataValidade = leitor.GetOrdinal("DataValidade");
+                    int idxDataAbertura = leitor.GetOrdinal("data_abertura");
+                    int idxDataValidade = leitor.GetOrdinal("data_validade");
                     while (leitor.Read())
                     {
                         var barril = new BarrilInstancia

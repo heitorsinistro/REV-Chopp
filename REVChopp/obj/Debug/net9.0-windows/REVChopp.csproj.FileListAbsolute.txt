@@ -40,3 +40,11 @@ C:\Users\Win10Pró\Documents\GitHub\REV-Chopp\REVChopp\obj\Debug\net9.0-windows\
 C:\Users\Win10Pró\Documents\GitHub\REV-Chopp\REVChopp\obj\Debug\net9.0-windows\REVChopp.pdb
 C:\Users\Win10Pró\Documents\GitHub\REV-Chopp\REVChopp\obj\Debug\net9.0-windows\REVChopp.genruntimeconfig.cache
 C:\Users\Win10Pró\Documents\GitHub\REV-Chopp\REVChopp\obj\Debug\net9.0-windows\ref\REVChopp.dll
+C:\Users\Win10Pró\Documents\GitHub\REV-Chopp\REVChopp\bin\Debug\net9.0-windows\System.Configuration.ConfigurationManager.dll
+C:\Users\Win10Pró\Documents\GitHub\REV-Chopp\REVChopp\bin\Debug\net9.0-windows\System.Diagnostics.EventLog.dll
+C:\Users\Win10Pró\Documents\GitHub\REV-Chopp\REVChopp\bin\Debug\net9.0-windows\System.Security.Cryptography.ProtectedData.dll
+C:\Users\Win10Pró\Documents\GitHub\REV-Chopp\REVChopp\bin\Debug\net9.0-windows\System.Security.Permissions.dll
+C:\Users\Win10Pró\Documents\GitHub\REV-Chopp\REVChopp\bin\Debug\net9.0-windows\System.Windows.Extensions.dll
+C:\Users\Win10Pró\Documents\GitHub\REV-Chopp\REVChopp\bin\Debug\net9.0-windows\runtimes\win\lib\net8.0\System.Diagnostics.EventLog.Messages.dll
+C:\Users\Win10Pró\Documents\GitHub\REV-Chopp\REVChopp\bin\Debug\net9.0-windows\runtimes\win\lib\net8.0\System.Diagnostics.EventLog.dll
+C:\Users\Win10Pró\Documents\GitHub\REV-Chopp\REVChopp\bin\Debug\net9.0-windows\runtimes\win\lib\net8.0\System.Windows.Extensions.dll

@@ -10,7 +10,8 @@ namespace REVChopp.Repositories
         {
             using (var conexao = BancoDados.ObterConexao())
             {
-                var comando = new MySqlCommand("INSERT INTO Pedido (UsuarioId, NumeroMesa, DataHora, FormaPagamento, ValorTotal) VALUES (@usuario, @mesa, @data, @pagamento, @valor); SELECT LAST_INSERT_ID();", conexao);
+                var comando = new MySqlCommand(@"INSERT INTO Pedido (id_usuario, numero_mesa, data_hora, forma_pagamento, valor_total) 
+                    VALUES (@usuario, @mesa, @data, @pagamento, @valor); SELECT LAST_INSERT_ID();", conexao);
                 comando.Parameters.AddWithValue("@usuario", pedido.UsuarioId);
                 comando.Parameters.AddWithValue("@mesa", pedido.NumeroMesa);
                 comando.Parameters.AddWithValue("@data", pedido.DataHora);
@@ -25,7 +26,7 @@ namespace REVChopp.Repositories
         {
             using (var conexao = BancoDados.ObterConexao())
             {
-                var comando = new MySqlCommand("UPDATE Pedido SET ValorTotal = @valor WHERE id_pedido = @id", conexao);
+                var comando = new MySqlCommand("UPDATE Pedido SET valor_total = @valor WHERE id_pedido = @id", conexao);
                 comando.Parameters.AddWithValue("@valor", novoTotal);
                 comando.Parameters.AddWithValue("@id", pedidoId);
                 comando.ExecuteNonQuery();
@@ -45,11 +46,11 @@ namespace REVChopp.Repositories
                         return new Pedido
                         {
                             Id = leitor.GetInt32("id_pedido"),
-                            UsuarioId = leitor.GetInt32("UsuarioId"),
-                            NumeroMesa = leitor.GetInt32("NumeroMesa"),
-                            DataHora = leitor.GetDateTime("DataHora"),
-                            FormaPagamento = leitor.GetString("FormaPagamento"),
-                            ValorTotal = leitor.GetDecimal("ValorTotal")
+                            UsuarioId = leitor.GetInt32("id_usuario"),
+                            NumeroMesa = leitor.GetInt32("numero_mesa"),
+                            DataHora = leitor.GetDateTime("data_hora"),
+                            FormaPagamento = leitor.GetString("forma_pagamento"),
+                            ValorTotal = leitor.GetDecimal("valor_total")
                         };
                     }
                 }
