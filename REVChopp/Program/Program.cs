@@ -1,15 +1,16 @@
-﻿namespace REVChopp.Program
+﻿using System.Windows.Forms;
+using REVChopp.UI;
+
+namespace REVChopp.Program
 {
-    using REVChopp.Core;
 
     class Program
     {
+        [STAThread]
         static void Main(string[] args)
         {
-            while (true)
-            {
-                Sistema.Iniciar();
-            }
+            ApplicationConfiguration.Initialize();
+            Application.Run(new LoginForm());
         }
     }
 }

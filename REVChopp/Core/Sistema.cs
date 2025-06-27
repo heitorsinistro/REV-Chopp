@@ -156,7 +156,7 @@ namespace REVChopp.Core
                         {
                             BarrilTipoId = tipo.Id,
                             VolumeRestanteMl = tipo.CapacidadeLitros * 1000,
-                            Status = "em uso"
+                            Status = "em_uso"
                         });
                         Console.WriteLine("Barril adicionado ao estoque.");
                     }

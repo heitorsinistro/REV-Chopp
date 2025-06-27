@@ -34,7 +34,7 @@ namespace REVChopp.Repositories
             using (var conexao = BancoDados.ObterConexao())
             {
                 var comando = new MySqlCommand(@"INSERT INTO RelatorioItens (id_relatorio, id_produto, nome_produto, quantidade_vendida, total_receita_produto) 
-                    VALUES (@relatorio, @produto, @nome, @quantidade, @total)", conexao);
+                    VALUES (@relatorio, @produto, @nome, @quantidade, @total);", conexao);
                 comando.Parameters.AddWithValue("@relatorio", item.RelatorioId);
                 comando.Parameters.AddWithValue("@produto", item.ProdutoId);
                 comando.Parameters.AddWithValue("@nome", item.NomeProduto);

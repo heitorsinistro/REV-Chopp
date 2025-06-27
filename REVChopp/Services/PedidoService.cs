@@ -7,20 +7,18 @@ namespace REVChopp.Services
     {
         public static Pedido CriarPedido(int usuarioId, int numeroMesa, string formaPagamento)
         {
-            // Validação dos parâmetros
             if (usuarioId <= 0 || numeroMesa <= 0 || string.IsNullOrEmpty(formaPagamento))
             {
                 throw new ArgumentException("Parâmetros inválidos para criar o pedido.");
             }
 
-            // Criação do pedido
             Pedido novoPedido = new Pedido
             {
                 UsuarioId = usuarioId,
                 NumeroMesa = numeroMesa,
                 DataHora = DateTime.Now,
                 FormaPagamento = formaPagamento,
-                ValorTotal = 0 // Inicialmente zero, será atualizado com os itens do pedido
+                ValorTotal = 0
             };
 
             int pedidoId = PedidoRepository.Inserir(novoPedido);

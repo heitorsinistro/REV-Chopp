@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("REVChopp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7ea0c31be80bb9a1aa18fe6b88814ee83af24728")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+a79099fe976e19c4596cfd3c8c2d29d03a387dbc")]
 [assembly: System.Reflection.AssemblyProductAttribute("REVChopp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("REVChopp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
