@@ -12,14 +12,14 @@ namespace REVChopp.Repositories
             {
                 var comando = new MySqlCommand(@"INSERT INTO ItensPedido (id_pedido, id_produto, id_copo, tipo_item, nome_item, preco_unitario, quantidade, subtotal) 
                     VALUES (@id_pedido, @id_produto, @id_copo, @tipo_item, @nome_item, @preco_unitario, @quantidade, @subtotal)", conexao);
-                comando.Parameters.AddWithValue("@pedido", item.PedidoId);
-                comando.Parameters.AddWithValue("@produto", (object?)item.ProdutoId ?? DBNull.Value);
-                comando.Parameters.AddWithValue("@copo", (object?)item.CopoId ?? DBNull.Value);
-                comando.Parameters.AddWithValue("@tipo", item.TipoItem);
-                comando.Parameters.AddWithValue("@nome", item.NomeItem);
-                comando.Parameters.AddWithValue("@preco", item.PrecoUnitario);
-                comando.Parameters.AddWithValue("@qtd", item.Quantidade);
-                comando.Parameters.AddWithValue("@sub", item.Subtotal);
+                comando.Parameters.AddWithValue("@id_pedido", item.PedidoId);
+                comando.Parameters.AddWithValue("@id_produto", (object?)item.ProdutoId ?? DBNull.Value);
+                comando.Parameters.AddWithValue("@id_copo", (object?)item.CopoId ?? DBNull.Value);
+                comando.Parameters.AddWithValue("@tipo_item", item.TipoItem);
+                comando.Parameters.AddWithValue("@nome_item", item.NomeItem);
+                comando.Parameters.AddWithValue("@preco_unitario", item.PrecoUnitario);
+                comando.Parameters.AddWithValue("@quantidade", item.Quantidade);
+                comando.Parameters.AddWithValue("@subtotal", item.Subtotal);
                 comando.ExecuteNonQuery();
             }
         }

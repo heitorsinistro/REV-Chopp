@@ -3,53 +3,59 @@ namespace REVChopp.UI
     partial class VendaForm
     {
         private System.ComponentModel.IContainer components = null;
-        private System.Windows.Forms.Label lblIdPedido;
-        private System.Windows.Forms.TextBox txtIdPedido;
-        private System.Windows.Forms.Button btnFinalizarVenda;
 
         protected override void Dispose(bool disposing)
         {
-            if (disposing && (components != null))
-                components.Dispose();
+            if (disposing && (components != null)) components.Dispose();
             base.Dispose(disposing);
         }
 
         private void InitializeComponent()
         {
-            this.lblIdPedido = new System.Windows.Forms.Label();
-            this.txtIdPedido = new System.Windows.Forms.TextBox();
+            this.cmbPedidos = new System.Windows.Forms.ComboBox();
             this.btnFinalizarVenda = new System.Windows.Forms.Button();
+            this.lblMesa = new System.Windows.Forms.Label();
+            this.lblTotal = new System.Windows.Forms.Label();
             this.SuspendLayout();
 
-            // lblIdPedido
-            this.lblIdPedido.AutoSize = true;
-            this.lblIdPedido.Location = new System.Drawing.Point(20, 20);
-            this.lblIdPedido.Name = "lblIdPedido";
-            this.lblIdPedido.Size = new System.Drawing.Size(112, 15);
-            this.lblIdPedido.Text = "ID do Pedido (aberto):";
+            // cmbPedidos
+            this.cmbPedidos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cmbPedidos.Location = new System.Drawing.Point(20, 20);
+            this.cmbPedidos.Size = new System.Drawing.Size(250, 23);
+            this.cmbPedidos.SelectedIndexChanged += new System.EventHandler(this.cmbPedidos_SelectedIndexChanged);
 
-            // txtIdPedido
-            this.txtIdPedido.Location = new System.Drawing.Point(20, 40);
-            this.txtIdPedido.Name = "txtIdPedido";
-            this.txtIdPedido.Size = new System.Drawing.Size(200, 23);
+            // lblMesa
+            this.lblMesa.Location = new System.Drawing.Point(20, 50);
+            this.lblMesa.Size = new System.Drawing.Size(250, 20);
+            this.lblMesa.Text = "Mesa:";
+
+            // lblTotal
+            this.lblTotal.Location = new System.Drawing.Point(20, 70);
+            this.lblTotal.Size = new System.Drawing.Size(250, 20);
+            this.lblTotal.Text = "Total:";
 
             // btnFinalizarVenda
-            this.btnFinalizarVenda.Location = new System.Drawing.Point(20, 80);
-            this.btnFinalizarVenda.Name = "btnFinalizarVenda";
-            this.btnFinalizarVenda.Size = new System.Drawing.Size(200, 30);
+            this.btnFinalizarVenda.Location = new System.Drawing.Point(20, 110);
+            this.btnFinalizarVenda.Size = new System.Drawing.Size(250, 30);
             this.btnFinalizarVenda.Text = "Finalizar Venda";
-            this.btnFinalizarVenda.UseVisualStyleBackColor = true;
             this.btnFinalizarVenda.Click += new System.EventHandler(this.btnFinalizarVenda_Click);
 
             // VendaForm
-            this.ClientSize = new System.Drawing.Size(250, 130);
-            this.Controls.Add(this.lblIdPedido);
-            this.Controls.Add(this.txtIdPedido);
+            this.ClientSize = new System.Drawing.Size(300, 170);
+            this.Controls.Add(this.cmbPedidos);
+            this.Controls.Add(this.lblMesa);
+            this.Controls.Add(this.lblTotal);
             this.Controls.Add(this.btnFinalizarVenda);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "VendaForm";
-            this.Text = "Finalizar Venda";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Registrar Venda";
             this.ResumeLayout(false);
-            this.PerformLayout();
         }
+
+        private System.Windows.Forms.ComboBox cmbPedidos;
+        private System.Windows.Forms.Button btnFinalizarVenda;
+        private System.Windows.Forms.Label lblMesa;
+        private System.Windows.Forms.Label lblTotal;
     }
 }

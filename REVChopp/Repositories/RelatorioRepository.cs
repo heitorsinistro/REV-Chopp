@@ -11,9 +11,10 @@ namespace REVChopp.Repositories
         {
             using (var conexao = BancoDados.ObterConexao())
             {
-                var comando = new MySqlCommand("INSERT INTO Relatorio (tipo, data_inicio, gerado_por) VALUES (@tipo, @data, @autor); SELECT LAST_INSERT_ID();", conexao);
+                var comando = new MySqlCommand("INSERT INTO Relatorio (tipo, data_inicio, data_fim, gerado_por) VALUES (@tipo, @data, @fim, @autor); SELECT LAST_INSERT_ID();", conexao);
                 comando.Parameters.AddWithValue("@tipo", r.Tipo);
                 comando.Parameters.AddWithValue("@data", r.DataInicio);
+                comando.Parameters.AddWithValue("@fim", r.DataFim);
                 comando.Parameters.AddWithValue("@autor", r.GeradoPor);
                 return Convert.ToInt32(comando.ExecuteScalar());
             }
@@ -29,6 +30,29 @@ namespace REVChopp.Repositories
                 var result = comando.ExecuteScalar();
                 return result != DBNull.Value ? Convert.ToDecimal(result) : 0;
             }
+        }
+
+        public static List<Relatorio> BuscarTodos()
+        {
+            var relatorios = new List<Relatorio>();
+            using (var conexao = BancoDados.ObterConexao())
+            {
+                var comando = new MySqlCommand("SELECT * FROM Relatorio ORDER BY data_inicio DESC", conexao);
+                using (var leitor = comando.ExecuteReader())
+                {
+                    while (leitor.Read())
+                    {
+                        relatorios.Add(new Relatorio
+                        {
+                            Id = leitor.GetInt32("id_relatorio"),
+                            Tipo = leitor.GetString("tipo"),
+                            DataInicio = leitor.GetDateTime("data_inicio"),
+                            GeradoPor = leitor.GetInt32("gerado_por")
+                        });
+                    }
+                }
+            }
+            return relatorios;
         }
     }
 }

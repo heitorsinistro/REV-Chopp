@@ -64,5 +64,23 @@ namespace REVChopp.Repositories
                 return null;
             }
         }
+
+        public static Usuario? Atualizar(Usuario usuario)
+        {
+            using (var conexao = BancoDados.ObterConexao())
+            {
+                var comando = new MySqlCommand("UPDATE Usuario SET nome = @nome, senha = @senha, nivel_acesso = @nivel WHERE id_usuario = @id", conexao);
+                comando.Parameters.AddWithValue("@nome", usuario.Nome);
+                comando.Parameters.AddWithValue("@senha", usuario.Senha);
+                comando.Parameters.AddWithValue("@nivel", usuario.NivelAcesso);
+                comando.Parameters.AddWithValue("@id", usuario.Id);
+
+                if (comando.ExecuteNonQuery() > 0)
+                {
+                    return usuario;
+                }
+                return null;
+            }
+        }
     }
 }

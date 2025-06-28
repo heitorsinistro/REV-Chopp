@@ -43,5 +43,29 @@ namespace REVChopp.Repositories
                 comando.ExecuteNonQuery();
             }
         }
+
+        public static List<RelatorioItens> BuscarPorRelatorio(int relatorioId)
+        {
+            var lista = new List<RelatorioItens>();
+            using (var conexao = BancoDados.ObterConexao())
+            {
+                var comando = new MySqlCommand("SELECT * FROM RelatorioItens WHERE id_relatorio = @relatorio", conexao);
+                comando.Parameters.AddWithValue("@relatorio", relatorioId);
+                using var reader = comando.ExecuteReader();
+                while (reader.Read())
+                {
+                    lista.Add(new RelatorioItens
+                    {
+                        Id = reader.GetInt32("id"),
+                        RelatorioId = reader.GetInt32("id_relatorio"),
+                        ProdutoId = reader.GetInt32("id_produto"),
+                        NomeProduto = reader.GetString("nome_produto"),
+                        QuantidadeVendida = reader.GetInt32("quantidade_vendida"),
+                        TotalReceitaProduto = reader.GetDecimal("total_receita_produto")
+                    });
+                }
+            }
+            return lista;
+        }
     }
 }

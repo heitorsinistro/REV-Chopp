@@ -41,11 +41,19 @@ namespace REVChopp.UI
         private void btnVenda_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Abrir tela de finalização de venda...");
+            var venda = new VendaForm(usuarioLogado);
+            this.Hide();
+            venda.ShowDialog();
+            this.Show();
         }
 
         private void btnRelatorios_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Abrir geração de relatórios...");
+            var relatorio = new RelatorioForm(usuarioLogado.Id);
+            this.Hide();
+            relatorio.ShowDialog();
+            this.Show();
         }
     }
 }

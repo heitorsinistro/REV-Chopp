@@ -84,5 +84,14 @@ namespace REVChopp.Services
             return BarrilTipoRepository.ListarTodos();
         }
 
+        public static void AdicionarTipoBarril(string nome)
+        {
+            if (string.IsNullOrWhiteSpace(nome))
+                throw new ArgumentException("Nome do tipo de barril não pode ser vazio.", nameof(nome));
+
+            var tipo = new BarrilTipo { Nome = nome };
+            BarrilTipoRepository.Inserir(tipo);
+        }
+
     }
 }

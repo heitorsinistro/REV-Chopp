@@ -15,6 +15,7 @@ namespace REVChopp.Services
             {
                 Tipo = "Diário",
                 DataInicio = inicio,
+                DataFim = fim,
                 GeradoPor = usuarioId
             };
             int relatorioId = RelatorioRepository.Inserir(relatorio);

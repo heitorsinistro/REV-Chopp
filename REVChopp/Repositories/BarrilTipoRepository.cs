@@ -6,6 +6,21 @@ namespace REVChopp.Repositories
 {
     public class BarrilTipoRepository
     {
+
+        public static void Inserir(BarrilTipo barrilTipo)
+        {
+            if (barrilTipo == null)
+                throw new ArgumentNullException(nameof(barrilTipo), "BarrilTipo não pode ser nulo.");
+
+            using (var conexao = BancoDados.ObterConexao())
+            {
+                var comando = new MySqlCommand("INSERT INTO BarrilTipo (nome, tipo_cerveja, capacidade_litros) VALUES (@nome, @tipoCerveja, @capacidadeLitros)", conexao);
+                comando.Parameters.AddWithValue("@nome", barrilTipo.Nome);
+                comando.Parameters.AddWithValue("@tipoCerveja", barrilTipo.TipoCerveja);
+                comando.Parameters.AddWithValue("@capacidadeLitros", barrilTipo.CapacidadeLitros);
+                comando.ExecuteNonQuery();
+            }
+        }
         public static BarrilTipo ObterPorId(int id)
         {
             using (var conexao = BancoDados.ObterConexao())
