@@ -3,9 +3,9 @@ using REVChopp.Repositories;
 
 namespace REVChopp.Services
 {
-    public static class PedidoService
+    public class PedidoService
     {
-        public static Pedido CriarPedido(int usuarioId, int numeroMesa, string formaPagamento)
+        public Pedido CriarPedido(int usuarioId, int numeroMesa, string formaPagamento)
         {
             if (usuarioId <= 0 || numeroMesa <= 0 || string.IsNullOrEmpty(formaPagamento))
             {
@@ -27,7 +27,7 @@ namespace REVChopp.Services
             return novoPedido;
         }
 
-        public static void AdicionarItemProduto(Pedido pedido, ProdutoUnitario produto, int quantidade)
+        public void AdicionarItemProduto(Pedido pedido, ProdutoUnitario produto, int quantidade)
         {
             var item = new ItensPedido
             {
@@ -45,7 +45,7 @@ namespace REVChopp.Services
             PedidoRepository.AtualizarValorTotal(pedido.Id, pedido.ValorTotal);
         }
 
-        public static void AdicionarItemCopo(Pedido pedido, Copo copo, int quantidade)
+        public void AdicionarItemCopo(Pedido pedido, Copo copo, int quantidade)
         {
             var item = new ItensPedido
             {
@@ -63,7 +63,7 @@ namespace REVChopp.Services
             PedidoRepository.AtualizarValorTotal(pedido.Id, pedido.ValorTotal);
         }
 
-        public static void FinalizarPedido(Pedido pedido)
+        public void FinalizarPedido(Pedido pedido)
         {
             if (pedido == null || pedido.Id <= 0)
             {
@@ -79,5 +79,7 @@ namespace REVChopp.Services
 
             Console.WriteLine($"Pedido {pedido.Id} finalizado. Total: R${pedido.ValorTotal:F2}");
         }
+
+        
     }
 }

@@ -57,5 +57,67 @@ namespace REVChopp.Repositories
             }
             return null;
         }
+
+        public class ItemResumoPedido
+        {
+            public string NomeExibido { get; set; } = "";
+            public int Quantidade { get; set; }
+            public decimal TotalItem { get; set; }
+        }
+
+        public static List<ItemResumoPedido> ObterItensDoPedido(int pedidoId)
+        {
+            var itens = new List<ItemResumoPedido>();
+
+            using var conexao = BancoDados.ObterConexao();
+            conexao.Open();
+
+            // Itens com ProdutoUnitario
+            string sqlProduto = @"
+                SELECT i.Quantidade, p.Nome, i.TotalItem
+                FROM ItensPedido i
+                JOIN ProdutoUnitario p ON i.ProdutoId = p.Id
+                WHERE i.PedidoId = @pedidoId AND i.ProdutoId IS NOT NULL";
+
+            using (var comando = new MySqlCommand(sqlProduto, conexao))
+            {
+                comando.Parameters.AddWithValue("@pedidoId", pedidoId);
+                using var reader = comando.ExecuteReader();
+                while (reader.Read())
+                {
+                    itens.Add(new ItemResumoPedido
+                    {
+                        NomeExibido = reader.GetString("Nome"),
+                        Quantidade = reader.GetInt32("Quantidade"),
+                        TotalItem = reader.GetDecimal("TotalItem")
+                    });
+                }
+            }
+
+            // Itens com Copo
+            string sqlCopo = @"
+                SELECT i.Quantidade, c.CapacidadeMl, i.TotalItem
+                FROM ItensPedido i
+                JOIN Copo c ON i.CopoId = c.Id
+                WHERE i.PedidoId = @pedidoId AND i.CopoId IS NOT NULL";
+
+            using (var comando = new MySqlCommand(sqlCopo, conexao))
+            {
+                comando.Parameters.AddWithValue("@pedidoId", pedidoId);
+                using var reader = comando.ExecuteReader();
+                while (reader.Read())
+                {
+                    string nomeCopo = $"Copo {reader.GetInt32("CapacidadeMl")}ml";
+                    itens.Add(new ItemResumoPedido
+                    {
+                        NomeExibido = nomeCopo,
+                        Quantidade = reader.GetInt32("Quantidade"),
+                        TotalItem = reader.GetDecimal("TotalItem")
+                    });
+                }
+            }
+
+            return itens;
+        }
     }
 }

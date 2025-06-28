@@ -87,7 +87,9 @@ namespace REVChopp.Core
                     Console.Write("Forma de pagamento: ");
                     string formaPagamento = Console.ReadLine() ?? "";
 
-                    PedidoService.CriarPedido(usuarioLogado.Id, numeroMesa, formaPagamento);
+                    var pedidoService = new PedidoService();
+                    
+                    pedidoService.CriarPedido(usuarioLogado.Id, numeroMesa, formaPagamento);
                 }
                 else if (op == "3")
                 {

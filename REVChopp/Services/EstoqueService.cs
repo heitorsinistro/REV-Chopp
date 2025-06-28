@@ -74,20 +74,15 @@ namespace REVChopp.Services
             BarrilInstanciaRepository.Remover(id);
         }
 
-        public static void ListarBarris()
+        public static List<BarrilInstancia> ListarBarris()
         {
-            var barris = BarrilInstanciaRepository.ListarTodos();
-            if (barris.Count == 0)
-            {
-                Console.WriteLine("Nenhum barril encontrado.");
-                return;
-            }
-
-            foreach (var barril in barris)
-            {
-                var tipo = BarrilTipoRepository.ObterPorId(barril.BarrilTipoId);
-                Console.WriteLine($"{barril.Id} - {tipo.Nome} - {tipo.CapacidadeLitros}L - {barril.VolumeRestanteMl}ml restantes - Tipo: {tipo.TipoCerveja} - Status: {barril.Status}");
-            }
+            return BarrilInstanciaRepository.ListarTodos();
         }
+
+        public static List<BarrilTipo> ListarTiposBarril()
+        {
+            return BarrilTipoRepository.ListarTodos();
+        }
+
     }
 }

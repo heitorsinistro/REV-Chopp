@@ -28,5 +28,28 @@ namespace REVChopp.Repositories
             }
             throw new Exception("BarrilTipo não encontrado.");
         }
+
+        public static List<BarrilTipo> ListarTodos()
+        {
+            var lista = new List<BarrilTipo>();
+            using (var conexao = BancoDados.ObterConexao())
+            {
+                var comando = new MySqlCommand("SELECT * FROM BarrilTipo", conexao);
+                using (var leitor = comando.ExecuteReader())
+                {
+                    while (leitor.Read())
+                    {
+                        lista.Add(new BarrilTipo
+                        {
+                            Id = leitor.GetInt32("id_barril_tipo"),
+                            Nome = leitor.GetString("nome"),
+                            TipoCerveja = leitor.GetString("tipo_cerveja"),
+                            CapacidadeLitros = leitor.GetInt32("capacidade_litros")
+                        });
+                    }
+                }
+            }
+            return lista;
+        }
     }
 }

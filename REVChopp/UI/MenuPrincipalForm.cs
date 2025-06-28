@@ -23,11 +23,19 @@ namespace REVChopp.UI
         private void btnEstoque_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Abrir gerenciamento de estoque...");
+            var estoque = new EstoqueForm(usuarioLogado);
+            this.Hide();
+            estoque.ShowDialog();
+            this.Show();
         }
 
         private void btnPedido_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Abrir tela de pedido...");
+            var pedido = new PedidoForm(usuarioLogado);
+            this.Hide();
+            pedido.ShowDialog();
+            this.Show();
         }
 
         private void btnVenda_Click(object sender, EventArgs e)

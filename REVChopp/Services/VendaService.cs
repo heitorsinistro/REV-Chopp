@@ -3,9 +3,9 @@ using REVChopp.Repositories;
 
 namespace REVChopp.Services
 {
-    public static class VendaService
+    public class VendaService
     {
-        public static void RegistrarVenda(int pedidoId, int usuarioId)
+        public void RegistrarVenda(int pedidoId, int usuarioId)
         {
             var pedido = PedidoRepository.BuscarPorId(pedidoId);
 
