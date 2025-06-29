@@ -33,7 +33,7 @@ namespace REVChopp.UI
 
             // cmbNivelAcesso
             this.cmbNivelAcesso.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbNivelAcesso.Items.AddRange(new object[] { "Atendente", "Administrador" });
+            this.cmbNivelAcesso.Items.AddRange(new object[] { "funcionario", "admin" });
             this.cmbNivelAcesso.Location = new System.Drawing.Point(20, 130);
             this.cmbNivelAcesso.Size = new System.Drawing.Size(260, 23);
 

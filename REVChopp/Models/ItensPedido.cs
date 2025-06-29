@@ -11,5 +11,6 @@ namespace REVChopp.Models
         public decimal PrecoUnitario { get; set; }
         public int Quantidade { get; set; }
         public decimal Subtotal { get; set; }
+        public int? BarrilId { get; set; }
     }
 }

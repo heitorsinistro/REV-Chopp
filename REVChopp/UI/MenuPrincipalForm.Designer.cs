@@ -61,7 +61,7 @@ namespace REVChopp.UI
             this.btnRelatorios.Click += new System.EventHandler(this.btnRelatorios_Click);
 
             // MenuPrincipalForm
-            this.ClientSize = new System.Drawing.Size(270, 240);
+            this.ClientSize = new System.Drawing.Size(270, 270);
             this.Controls.Add(this.lblUsuario);
             this.Controls.Add(this.btnEstoque);
             this.Controls.Add(this.btnPedido);

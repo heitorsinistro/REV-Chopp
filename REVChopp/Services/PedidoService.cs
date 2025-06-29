@@ -45,7 +45,7 @@ namespace REVChopp.Services
             PedidoRepository.AtualizarValorTotal(pedido.Id, pedido.ValorTotal);
         }
 
-        public void AdicionarItemCopo(Pedido pedido, Copo copo, int quantidade)
+        public void AdicionarItemCopo(Pedido pedido, Copo copo, int quantidade, int barrilId)
         {
             var item = new ItensPedido
             {
@@ -55,12 +55,24 @@ namespace REVChopp.Services
                 NomeItem = $"{copo.CapacidadeMl}ml",
                 Quantidade = quantidade,
                 PrecoUnitario = copo.Preco,
-                Subtotal = copo.Preco * quantidade
+                Subtotal = copo.Preco * quantidade,
+                BarrilId = barrilId
             };
 
             ItensPedidoRepository.Inserir(item);
             pedido.ValorTotal += item.Subtotal;
             PedidoRepository.AtualizarValorTotal(pedido.Id, pedido.ValorTotal);
+
+            //tirar se necessario vv
+            int totalMl = quantidade * copo.CapacidadeMl;
+
+            var barril = BarrilInstanciaRepository.BuscarPorId(barrilId);
+
+            if (barril == null || barril.VolumeRestanteMl < totalMl)
+            {
+                throw new Exception("Barril selecionado não existe ou não possui volume suficiente.");
+            }
+            //ConsumoBarrilRepository.RegistrarConsumo(pedido.Id, barril.Id, totalMl);
         }
 
         public void FinalizarPedido(Pedido pedido)

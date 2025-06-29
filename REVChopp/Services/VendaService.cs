@@ -25,29 +25,15 @@ namespace REVChopp.Services
             var itens = ItensPedidoRepository.ListarPorPedido(pedidoId);
             foreach (var item in itens)
             {
-                if (item.TipoItem == "copo" && item.CopoId.HasValue)
+                if (item.TipoItem == "produto" && item.ProdutoId.HasValue)
                 {
-                    // Buscar o copo para saber capacidade  
+                    ProdutoUnitarioRepository.DescontarEstoque(item.ProdutoId.Value, item.Quantidade);
+                }
+                else if (item.TipoItem == "copo" && item.CopoId.HasValue && item.BarrilId.HasValue)
+                {
                     var copo = CopoRepository.BuscarPorId(item.CopoId.Value);
                     int totalMl = copo.CapacidadeMl * item.Quantidade;
-
-                    // Buscar o primeiro barril disponível com volume suficiente  
-                    var barris = BarrilInstanciaRepository.ListarDisponiveis();
-                    var barril = barris.Find(b => b.VolumeRestanteMl >= totalMl);
-
-                    if (barril == null)
-                    {
-                        Console.WriteLine("⚠ Nenhum barril disponível com volume suficiente.");
-                        continue;
-                    }
-
-                    // Registrar consumo  
-                    ConsumoBarrilRepository.RegistrarConsumo(venda.Id, barril.Id, totalMl);
-                }
-                else if (item.TipoItem == "produto" && item.ProdutoId.HasValue)
-                {
-                    // Atualizar estoque do produto (subtrair)  
-                    ProdutoUnitarioRepository.DescontarEstoque(item.ProdutoId.Value, item.Quantidade);
+                    ConsumoBarrilRepository.RegistrarConsumo(venda.Id, item.BarrilId.Value, totalMl);
                 }
             }
             

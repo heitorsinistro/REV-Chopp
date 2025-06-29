@@ -64,6 +64,12 @@ namespace REVChopp.UI
 
                 if (int.TryParse(qtdInput, out int quantidade))
                 {
+                    if (produto.QuantidadeEstoque < quantidade)
+                    {
+                        MessageBox.Show("Estoque insuficiente para esse produto.", "Estoque insuficiente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+
                     pedidoService.AdicionarItemProduto(pedido, produto, quantidade);
                     MessageBox.Show("Produto adicionado ao pedido.");
                 }
@@ -91,9 +97,34 @@ namespace REVChopp.UI
                     return;
                 }
 
+                // novo: perguntar o tipo de cerveja
+                var barrisDisponiveis = BarrilInstanciaRepository.ListarDisponiveis()
+                    .Where(b => b.VolumeRestanteMl >= copo.CapacidadeMl * Convert.ToInt32(qtdInput))
+                    .ToList();
+
+                if (barrisDisponiveis.Count == 0)
+                {
+                    MessageBox.Show("Nenhum barril disponível com volume suficiente.");
+                    return;
+                }
+
+                string msg = "Escolha o barril:\n";
+                foreach (var b in barrisDisponiveis)
+                {
+                    var tipo = BarrilTipoRepository.ObterPorId(b.BarrilTipoId);
+                    msg += $"{b.Id} - {tipo?.Nome ?? "?"} ({tipo?.TipoCerveja ?? "?"}) - {b.VolumeRestanteMl}ml restantes\n";
+                }
+                string barrilInput = Microsoft.VisualBasic.Interaction.InputBox(msg, "Escolha o Barril");
+
+                if (!int.TryParse(barrilInput, out int barrilId) || barrisDisponiveis.All(b => b.Id != barrilId))
+                {
+                    MessageBox.Show("Barril inválido.");
+                    return;
+                }
+
                 if (int.TryParse(qtdInput, out int quantidade))
                 {
-                    pedidoService.AdicionarItemCopo(pedido, copo, quantidade);
+                    pedidoService.AdicionarItemCopo(pedido, copo, quantidade, barrilId);
                     MessageBox.Show("Copo adicionado ao pedido.");
                 }
             }

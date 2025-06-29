@@ -89,7 +89,7 @@ namespace REVChopp.Repositories
             var barris = new List<BarrilInstancia>();
             using (var conexao = BancoDados.ObterConexao())
             {
-                var comando = new MySqlCommand("SELECT * FROM BarrilInstancia WHERE status = 'em uso' AND volume_restante_ml > 0", conexao);
+                var comando = new MySqlCommand("SELECT * FROM barrilinstancia WHERE status = 'em_uso' AND volume_restante_ml > 0", conexao);
                 using (var leitor = comando.ExecuteReader())
                 {
                     int idxDataAbertura = leitor.GetOrdinal("data_abertura");

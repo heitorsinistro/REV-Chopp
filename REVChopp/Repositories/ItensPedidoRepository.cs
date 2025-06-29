@@ -10,8 +10,8 @@ namespace REVChopp.Repositories
         {
             using (var conexao = BancoDados.ObterConexao())
             {
-                var comando = new MySqlCommand(@"INSERT INTO ItensPedido (id_pedido, id_produto, id_copo, tipo_item, nome_item, preco_unitario, quantidade, subtotal) 
-                    VALUES (@id_pedido, @id_produto, @id_copo, @tipo_item, @nome_item, @preco_unitario, @quantidade, @subtotal)", conexao);
+                var comando = new MySqlCommand(@"INSERT INTO ItensPedido (id_pedido, id_produto, id_copo, tipo_item, nome_item, preco_unitario, quantidade, subtotal, id_barril_instancia) 
+                    VALUES (@id_pedido, @id_produto, @id_copo, @tipo_item, @nome_item, @preco_unitario, @quantidade, @subtotal, @id_barril_instancia)", conexao);
                 comando.Parameters.AddWithValue("@id_pedido", item.PedidoId);
                 comando.Parameters.AddWithValue("@id_produto", (object?)item.ProdutoId ?? DBNull.Value);
                 comando.Parameters.AddWithValue("@id_copo", (object?)item.CopoId ?? DBNull.Value);
@@ -20,6 +20,8 @@ namespace REVChopp.Repositories
                 comando.Parameters.AddWithValue("@preco_unitario", item.PrecoUnitario);
                 comando.Parameters.AddWithValue("@quantidade", item.Quantidade);
                 comando.Parameters.AddWithValue("@subtotal", item.Subtotal);
+                comando.Parameters.AddWithValue("@id_barril_instancia", (object?)item.BarrilId ?? DBNull.Value);
+
                 comando.ExecuteNonQuery();
             }
         }

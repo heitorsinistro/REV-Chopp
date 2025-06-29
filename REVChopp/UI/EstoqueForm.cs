@@ -30,29 +30,50 @@ namespace REVChopp.UI
 
         private void btnListarProdutos_Click(object sender, EventArgs e)
         {
-            var produtos = ProdutoUnitarioRepository.ListarTodos();
+            dgvEstoque.Columns.Clear();
             dgvEstoque.Rows.Clear();
 
+            // Adiciona colunas relevantes para produtos
+            dgvEstoque.Columns.Add("Id", "ID");
+            dgvEstoque.Columns.Add("Nome", "Nome");
+            dgvEstoque.Columns.Add("Preco", "Preço");
+            dgvEstoque.Columns.Add("QuantidadeEstoque", "Estoque");
+
+            var produtos = ProdutoUnitarioRepository.ListarTodos();
             foreach (var p in produtos)
             {
-                dgvEstoque.Rows.Add(p.Id, p.Nome, p.Preco, p.QuantidadeEstoque);
+                dgvEstoque.Rows.Add(
+                    p.Id,
+                    p.Nome,
+                    p.Preco,
+                    p.QuantidadeEstoque
+                );
             }
         }
 
+
         private void btnListarBarris_Click(object sender, EventArgs e)
         {
-            var barris = EstoqueService.ListarBarris();
+            dgvEstoque.Columns.Clear();
             dgvEstoque.Rows.Clear();
+
+            // Adiciona colunas relevantes para barris
+            dgvEstoque.Columns.Add("Id", "ID");
+            dgvEstoque.Columns.Add("Nome", "Nome");
+            dgvEstoque.Columns.Add("Capacidade", "Capacidade (L)");
+            dgvEstoque.Columns.Add("VolumeRestante", "Volume Restante (ml)");
+            dgvEstoque.Columns.Add("TipoCerveja", "Tipo de Cerveja");
+
+            var barris = EstoqueService.ListarBarris();
             foreach (var barril in barris)
             {
                 var tipo = BarrilTipoRepository.ObterPorId(barril.BarrilTipoId);
                 dgvEstoque.Rows.Add(
                     barril.Id,
-                    tipo?.Nome ?? "",
+                    $"BARRIL {tipo?.CapacidadeLitros ?? 0}L",
                     tipo?.CapacidadeLitros ?? 0,
                     barril.VolumeRestanteMl,
-                    tipo?.TipoCerveja ?? "",
-                    barril.Status
+                    tipo?.TipoCerveja ?? ""
                 );
             }
         }

@@ -30,7 +30,7 @@ namespace REVChopp.UI
         {
             usuario.Nome = txtNome.Text.Trim();
             usuario.Senha = txtSenha.Text;
-            usuario.NivelAcesso = cmbNivelAcesso.SelectedItem?.ToString() ?? "Atendente";
+            usuario.NivelAcesso = cmbNivelAcesso.SelectedItem?.ToString() ?? "";
 
             try
             {

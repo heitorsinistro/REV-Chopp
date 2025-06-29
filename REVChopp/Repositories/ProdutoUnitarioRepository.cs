@@ -79,6 +79,17 @@ namespace REVChopp.Repositories
         {
             using (var conexao = BancoDados.ObterConexao())
             {
+                // verifica o estoque atual
+                var comandoCheck = new MySqlCommand("SELECT quantidade_estoque FROM ProdutoUnitario WHERE id_produto = @id", conexao);
+                comandoCheck.Parameters.AddWithValue("@id", produtoId);
+                int estoqueAtual = Convert.ToInt32(comandoCheck.ExecuteScalar());
+
+                if (estoqueAtual < quantidade)
+                {
+                    throw new InvalidOperationException("Estoque insuficiente para realizar a venda.");
+                }
+
+                // se tiver estoque suficiente, desconta a quantidade
                 var comando = new MySqlCommand("UPDATE ProdutoUnitario SET quantidade_estoque = quantidade_estoque - @quantidade WHERE id_produto = @id", conexao);
                 comando.Parameters.AddWithValue("@quantidade", quantidade);
                 comando.Parameters.AddWithValue("@id", produtoId);

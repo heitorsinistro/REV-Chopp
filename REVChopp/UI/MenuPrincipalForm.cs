@@ -18,11 +18,34 @@ namespace REVChopp.UI
             {
                 btnRelatorios.Enabled = false;
             }
+            else
+            {
+                AdicionarBotaoGerenciarUsuarios();
+            }
+        }
+
+        private void AdicionarBotaoGerenciarUsuarios()
+        {
+            Button btnUsuarios = new Button
+            {
+                Text = "Gerenciar Usuários",
+                Width = 200,
+                Height = 30,
+                Left = 30,
+                Top = btnRelatorios.Bottom + 10
+            };
+
+            btnUsuarios.Click += (s, e) =>
+            {
+                var usuarioForm = new UsuarioForm();
+                usuarioForm.ShowDialog();
+            };
+
+            this.Controls.Add(btnUsuarios);
         }
 
         private void btnEstoque_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Abrir gerenciamento de estoque...");
             var estoque = new EstoqueForm(usuarioLogado);
             this.Hide();
             estoque.ShowDialog();
@@ -31,7 +54,6 @@ namespace REVChopp.UI
 
         private void btnPedido_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Abrir tela de pedido...");
             var pedido = new PedidoForm(usuarioLogado);
             this.Hide();
             pedido.ShowDialog();
@@ -40,7 +62,6 @@ namespace REVChopp.UI
 
         private void btnVenda_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Abrir tela de finalização de venda...");
             var venda = new VendaForm(usuarioLogado);
             this.Hide();
             venda.ShowDialog();
@@ -49,7 +70,6 @@ namespace REVChopp.UI
 
         private void btnRelatorios_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Abrir geração de relatórios...");
             var relatorio = new RelatorioForm(usuarioLogado.Id);
             this.Hide();
             relatorio.ShowDialog();
