@@ -20,7 +20,8 @@ namespace REVChopp.Services
                 UsuarioId = usuarioId,
                 DataHora = DateTime.Now
             };
-            VendaRepository.RegistrarVenda(venda);
+            int vendaId = VendaRepository.RegistrarVenda(venda);
+            venda.Id = vendaId;
 
             var itens = ItensPedidoRepository.ListarPorPedido(pedidoId);
             foreach (var item in itens)

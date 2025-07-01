@@ -33,7 +33,6 @@ namespace REVChopp.UI
             dgvEstoque.Columns.Clear();
             dgvEstoque.Rows.Clear();
 
-            // Adiciona colunas relevantes para produtos
             dgvEstoque.Columns.Add("Id", "ID");
             dgvEstoque.Columns.Add("Nome", "Nome");
             dgvEstoque.Columns.Add("Preco", "Preço");
@@ -57,7 +56,6 @@ namespace REVChopp.UI
             dgvEstoque.Columns.Clear();
             dgvEstoque.Rows.Clear();
 
-            // Adiciona colunas relevantes para barris
             dgvEstoque.Columns.Add("Id", "ID");
             dgvEstoque.Columns.Add("Nome", "Nome");
             dgvEstoque.Columns.Add("Capacidade", "Capacidade (L)");

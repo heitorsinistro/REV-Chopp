@@ -11,16 +11,22 @@ namespace REVChopp.Repositories
         {
             using (var conexao = BancoDados.ObterConexao())
             {
-                var insert = new MySqlCommand("INSERT INTO ConsumoBarril (id_venda, id_barril_instancia, ml_utilizado) VALUES (@vendaId, @barrilInstanciaId, @mlConsumido)", conexao);
+                var insert = new MySqlCommand(@"INSERT INTO consumobarril (id_venda, id_barril_instancia, ml_utilizado) 
+                    VALUES (@vendaId, @barrilInstanciaId, @mlConsumido)", conexao);
                 insert.Parameters.AddWithValue("@vendaId", vendaId);
                 insert.Parameters.AddWithValue("@barrilInstanciaId", barrilInstanciaId);
                 insert.Parameters.AddWithValue("@mlConsumido", mlConsumido);
                 insert.ExecuteNonQuery();
 
-                var update = new MySqlCommand("UPDATE BarrilInstancia SET volume_restante_ml = volume_restante_ml - @mlConsumido WHERE id_barril_instancia = @barril", conexao);
-                update.Parameters.AddWithValue("@ml", mlConsumido);
+                var update = new MySqlCommand(@"UPDATE barrilinstancia 
+                    SET volume_restante_ml = volume_restante_ml - @mlConsumido 
+                    WHERE id_barril_instancia = @barril", conexao);
+                update.Parameters.AddWithValue("@mlConsumido", mlConsumido);
                 update.Parameters.AddWithValue("@barril", barrilInstanciaId);
-                update.ExecuteNonQuery();
+                int linhasAfetadas = update.ExecuteNonQuery();
+
+                // LOG: mostra no Output do vscode (não na tela do sistema)
+                Console.WriteLine($"Consumo registrado: venda={vendaId}, barril={barrilInstanciaId}, ml={mlConsumido}, linhas afetadas={linhasAfetadas}");
             }
         }
 

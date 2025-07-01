@@ -47,7 +47,8 @@ namespace REVChopp.Repositories
                             NomeItem = leitor.GetString("nome_item"),
                             PrecoUnitario = leitor.GetDecimal("preco_unitario"),
                             Quantidade = leitor.GetInt32("quantidade"),
-                            Subtotal = leitor.GetDecimal("subtotal")
+                            Subtotal = leitor.GetDecimal("subtotal"),
+                            BarrilId = leitor["id_barril_instancia"] != DBNull.Value ? Convert.ToInt32(leitor["id_barril_instancia"]) : (int?)null
                         });
                     }
 
